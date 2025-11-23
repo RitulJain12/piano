@@ -79,7 +79,8 @@ document.querySelector('.btn-hide').addEventListener('click', function(e) {
     document.querySelectorAll('.white-key, .black-key').forEach(key => {
         key.textContent = showNotes ? key.textContent.replace('', NOTES[Math.floor(Math.random() * NOTES.length)]) : '';
     });
-    
+    const pianoEl = document.getElementById('piano');
+    pianoEl.innerHTML='';
     createPiano();
 });
 
@@ -98,3 +99,15 @@ function activateKeys() {
     });
 }
 activateKeys();
+function Keypress(){
+    document.body.addEventListener('keypress',(dets)=>{
+          let keypressed=dets.key;
+         keypressed= keypressed.toUpperCase();
+          const result = KEYS.find(ky => ky.note == keypressed);
+          console.log(result);
+          const audio=new Audio(result.audio);
+          audio.play();
+
+    });
+}
+Keypress();
